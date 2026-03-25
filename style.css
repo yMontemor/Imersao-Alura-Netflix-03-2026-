@@ -1,0 +1,259 @@
+/**
+ * ========================================
+ * NETFLIX CLONE - ESTILOS GLOBAIS
+ * ========================================
+ * Arquivo principal de estilos da página de seleção de perfis
+ * Inspirado no design Netflix com fundo preto, tipografia limpa e interatividade suave
+    * Autor: [Gabriel Montemór] -> Código 100% gerado por IA, sem cópia de terceiros.
+ */
+
+/**
+ * RESET GLOBAL
+ * Remove margens e preenchimentos padrão do navegador
+ * Aplica box-sizing para cálculos de tamanho mais previsíveis
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/**
+ * ESTILOS DO BODY
+ * Define as propriedades base da página inteira
+ * 
+ * - background-color: Fundo preto escuro (padrão Netflix)
+ * - color: Texto branco por padrão
+ * - font-family: Tipografia limpa e profissional
+ * - display flex + center: Centraliza todo o conteúdo no viewport
+ * - min-height: 100vh: Garante que o body ocupe toda a altura da tela
+ * - overflow: hidden: Remove scrollbars desnecessários
+ */
+body {
+    background-color: #141414;
+    color: #ffffff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/**
+ * CONTAINER PRINCIPAL (MAIN)
+ * Agrupa o título, perfis e botão em uma coluna centralizada
+ * 
+ * - text-align: center: Alinha todo o texto ao centro
+ * - flex-direction: column: Coloca os elementos em coluna (vertical)
+ * - align-items: center: Centraliza itens horizontalmente
+ * - max-width: 90vw: Limita a largura em 90% da tela para não ficcar muito largo
+ */
+main {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90vw;
+}
+
+/**
+ * TÍTULO PRINCIPAL (H1)
+ * "Quem está assistindo?"
+ * 
+ * - font-size clamp(): Define tamanho responsivo
+ *   * Mínimo: 2.2rem
+ *   * Ideal: 3.5vw (ajusta com a tela)
+ *   * Máximo: 3.2rem
+ * - font-weight: 500: Peso médio (semibold)
+ * - margin-bottom: Espaço entre título e perfis
+ */
+h1 {
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+}
+
+/**
+ * CONTAINER DOS PERFIS
+ * Agrupa os cards de perfil em uma linha responsiva
+ * 
+ * - display: flex: Coloca os perfis em linha
+ * - justify-content: center: Centraliza os perfis horizontalmente
+ * - gap: 4vw: Espaço entre perfis (4% da largura da tela)
+ * - flex-wrap: wrap: Perfis descem para nova linha se não couberem
+ */
+.profiles {
+    display: flex;
+    justify-content: center;
+    gap: 4vw;
+    flex-wrap: wrap;
+}
+
+/**
+ * FIGURA DO PERFIL
+ * Container que agrupa a imagem e nome do perfil
+ * 
+ * - flex-direction: column: Coloca imagem acima do nome
+ * - align-items: center: Centraliza imagem e nome
+ * - cursor: pointer: Indica que é clicável
+ * - transition: Suaviza o efeito de zoom no hover
+ */
+.profile figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+/**
+ * IMAGEM DO PERFIL
+ * Avatar com cantos levemente arredondados
+ * 
+ * - width/height: 160px: Tamanho padrão do avatar
+ * - border-radius: 12px: Cantos levemente arredondados, quase imperceptível
+ * - object-fit: cover: Corta a imagem para preencher o espaço sem distorcer
+ * - border: 4px solid transparent: Borda transparente padrão (não ocupa espaço extra no hover)
+ * - transition: Suaviza mudanças de bordas e transformações
+ */
+.profile img {
+    width: 160px;
+    height: 160px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 4px solid transparent;
+    box-shadow: none;
+    transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+/**
+ * NOME DO PERFIL
+ * Texto abaixo de cada imagem
+ * 
+ * - margin-top: 1rem: Espaço entre imagem e nome
+ * - font-size: 1.25rem: Tamanho legível
+ * - color: #808080: Cinza padrão
+ * - transition: Suaviza mudança de cor no hover
+ */
+figcaption {
+    margin-top: 1rem;
+    font-size: 1.25rem;
+    color: #808080;
+    transition: color 0.2s ease-in-out;
+}
+
+/**
+ * HOVER DO PERFIL - ZOOM
+ * Efeito quando mouse passa sobre o perfil
+ * Aumenta o perfil em 5%
+ */
+.profile:hover {
+    transform: scale(1.05);
+}
+
+/**
+ * HOVER - BORDA DA IMAGEM
+ * Quando mouse passa, a imagem ganha borda branca
+ * A transição foi definida na classe .profile img
+ */
+.profile:hover img {
+    border-color: #ffffff;
+}
+
+/**
+ * HOVER - COR DO NOME
+ * Quando mouse passa, o nome fica branco e mais negrito
+ */
+.profile:hover figcaption {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/**
+ * BOTÃO GERENCIAR PERFIS
+ * Caixa com borda para gerenciar contas
+ * 
+ * - display: inline-block: Comporta-se como bloco mas com tamanho do conteúdo
+ * - margin-top: 4rem: Distância grande do perfis para o botão
+ * - padding: 0.5rem 1.8rem: Espaçamento interno pequeno (altura x largura)
+ * - background: transparent: Sem fundo (apenas borda)
+ * - border: 1px solid #808080: Borda fina cinza
+ * - border-radius: 0: Cantos completamente quadrados
+ * - letter-spacing: 1px: Espaçamento entre letras
+ * - cursor: pointer: Indica que é clicável
+ * - transition: all: Suaviza todas as mudanças de propriedade
+ */
+.btn-gerenciar {
+    display: inline-block;
+    margin-top: 4rem;
+    padding: 0.5rem 1.8rem;
+    background-color: transparent;
+    color: #808080;
+    border: 1px solid #808080;
+    border-radius: 0;
+    font-size: 1rem;
+    text-decoration: none;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+}
+
+/**
+ * HOVER DO BOTÃO GERENCIAR
+ * Quando mouse passa, texto e borda ficam brancos
+ */
+.btn-gerenciar:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+/**
+ * ========================================
+ * RESPONSIVIDADE - TELAS MÉDIAS (ATÉ 768px)
+ * ========================================
+ * Ajusta tamanhos e espaçamentos para tablets e telas menores
+ */
+@media (max-width: 768px) {
+    /**
+     * Título menor para não dominar telas pequenas
+     */
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    /**
+     * Reduz espaço entre perfis em telas menores
+     */
+    .profiles {
+        gap: 2rem;
+    }
+
+    /**
+     * Imagens menores (110px) com borda reduzida (3px)
+     */
+    .profile img {
+        width: 110px;
+        height: 110px;
+        border-width: 3px;
+    }
+
+    /**
+     * Nome do perfil com tamanho reduzido
+     */
+    figcaption {
+        font-size: 1rem;
+    }
+
+    /**
+     * Botão "Gerenciar Perfis" com tamanho ajustado para mobile
+     * - margin-top reduzido para economizar espaço
+     * - padding aumentado para facilitar clique em touch
+     */
+    .btn-gerenciar {
+        margin-top: 2.5rem;
+        padding: 1.2rem 3rem;
+        font-size: 0.95rem;
+    }
+}
