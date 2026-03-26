@@ -38,6 +38,11 @@ body {
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+main {
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /**
@@ -78,16 +83,20 @@ h1 {
  * CONTAINER DOS PERFIS
  * Agrupa os cards de perfil em uma linha responsiva
  * 
- * - display: flex: Coloca os perfis em linha
+ * - display: grid: Usa grid para melhor controle responsivo
+ * - grid-template-columns: auto-fit para ajustar colunas automaticamente
  * - justify-content: center: Centraliza os perfis horizontalmente
  * - gap: 4vw: Espaço entre perfis (4% da largura da tela)
- * - flex-wrap: wrap: Perfis descem para nova linha se não couberem
+ * - list-style: none: Remove marcadores de lista
  */
 .profiles {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    justify-items: center;
     gap: 4vw;
-    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 /**
@@ -201,6 +210,137 @@ figcaption {
 }
 
 /**
+ * CONTAINER DOS BOTÕES
+ * Agrupa os botões em linha
+ */
+.buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+/**
+ * BOTÃO TOGGLE TEMA FIXO
+ * Botão pequeno no canto superior direito para alternar tema
+ */
+.btn-theme-fixed {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.btn-theme-fixed:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Light mode adjustments */
+.light-mode .btn-theme-fixed {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: #333333;
+}
+
+.light-mode .btn-theme-fixed .theme-icon--moon {
+    opacity: 0.2;
+}
+
+.light-mode .btn-theme-fixed .theme-icon--sun {
+    opacity: 1;
+}
+
+.light-mode .btn-theme-fixed .theme-knob {
+    transform: translateX(24px);
+    background-color: #ffffff;
+}
+
+.btn-theme-fixed:hover {
+    transform: translateY(-1px);
+}
+
+.btn-theme-fixed {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 60px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid #ffffff;
+    border-radius: 999px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    z-index: 1000;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-theme-fixed .theme-icon {
+    font-size: 0.9rem;
+    line-height: 1;
+    transition: opacity 0.3s ease;
+    opacity: 0.2;
+}
+
+.btn-theme-fixed .theme-icon--moon {
+    opacity: 1;
+}
+
+.btn-theme-fixed .theme-knob {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    transform: translateX(0);    
+}
+
+.btn-theme-fixed:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+}
+
+.light-mode .btn-theme-fixed {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000000;
+    border-color: #333333;
+}
+
+.light-mode .btn-theme-fixed .theme-icon--moon {
+    opacity: 0.2;
+}
+
+.light-mode .btn-theme-fixed .theme-icon--sun {
+    opacity: 1;
+}
+
+.light-mode .btn-theme-fixed .theme-knob {
+    transform: translateX(24px);
+    background-color: #ffffff;
+}
+
+.btn-theme-fixed:hover {
+    transform: translateY(-1px);
+}
+
+/**
  * HOVER DO BOTÃO GERENCIAR
  * Quando mouse passa, texto e borda ficam brancos
  */
@@ -211,25 +351,67 @@ figcaption {
 
 /**
  * ========================================
+ * MODO CLARO (LIGHT MODE)
+ * ========================================
+ * Estilos para o modo claro quando a classe .light-mode é aplicada ao body
+ */
+.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.light-mode .profile img {
+    border-color: #cccccc;
+}
+
+.light-mode .profile:hover img {
+    border-color: #000000;
+}
+
+.light-mode figcaption {
+    color: #333333;
+}
+
+.light-mode .profile:hover figcaption {
+    color: #000000;
+}
+
+.light-mode .btn-gerenciar,
+.light-mode .btn-theme {
+    color: #333333;
+    border-color: #333333;
+}
+
+.light-mode .btn-gerenciar:hover,
+.light-mode .btn-theme:hover {
+    color: #000000;
+    border-color: #000000;
+}
+
+/**
+ * ========================================
  * RESPONSIVIDADE - TELAS MÉDIAS (ATÉ 768px)
  * ========================================
  * Ajusta tamanhos e espaçamentos para tablets e telas menores
  */
 @media (max-width: 768px) {
+
+    /**
+     * Perfis em flex wrap para telas médias
+     */
+    .profiles {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+    }
+
     /**
      * Título menor para não dominar telas pequenas
      */
     h1 {
         font-size: 2.2rem;
     }
-
-    /**
-     * Reduz espaço entre perfis em telas menores
-     */
-    .profiles {
-        gap: 2rem;
-    }
-
     /**
      * Imagens menores (110px) com borda reduzida (3px)
      */
@@ -255,5 +437,173 @@ figcaption {
         margin-top: 2.5rem;
         padding: 1.2rem 3rem;
         font-size: 0.95rem;
+    }
+}
+/**
+ * ========================================
+ * RESPONSIVIDADE - TELAS PEQUENAS (ATÉ 480px)
+ * ========================================
+ * Ajustes para dispositivos móveis muito pequenos
+ */
+@media (max-width: 480px) {
+
+    /**
+     * Permite rolagem se o conteúdo exceder a altura da tela
+     */
+    body {
+        overflow: auto;
+        min-height: auto;
+        padding: 2rem 0;
+    }
+
+    /**
+     * Ajusta o container principal para telas pequenas
+     */
+    main {
+        max-width: 95vw;
+    }
+
+    /**
+     * Título ainda menor para telas muito pequenas
+     */
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    /**
+     * Perfis em coluna vertical para melhor visualização
+     */
+    .profiles {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    /**
+     * Imagens ainda menores para caber melhor
+     */
+    .profile img {
+        width: 100px;
+        height: 100px;
+        border-width: 3px;
+    }
+
+    /**
+     * Nome do perfil menor
+     */
+    figcaption {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    /**
+     * Botão ajustado para telas pequenas
+     */
+    .btn-gerenciar {
+        margin-top: 2rem;
+        padding: 1rem 2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/**
+ * ========================================
+ * RESPONSIVIDADE - TABLETS (769px a 1024px)
+ * ========================================
+ * Ajustes para tablets
+ */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    /**
+     * Perfis em grid de 2 colunas para tablets
+     */
+    .profiles {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        justify-items: center;
+    }
+
+    /**
+     * Tamanho médio do título
+     */
+    h1 {
+        font-size: 2.8rem;
+    }
+
+    /**
+     * Imagens médias
+     */
+    .profile img {
+        width: 130px;
+        height: 130px;
+        border-width: 3px;
+    }
+
+    /**
+     * Nome do perfil médio
+     */
+    figcaption {
+        font-size: 1.1rem;
+    }
+
+    /**
+     * Botão ajustado para tablets
+     */
+    .btn-gerenciar {
+        margin-top: 3rem;
+        padding: 0.8rem 2.5rem;
+    }
+}
+
+/**
+ * ========================================
+ * RESPONSIVIDADE - DESKTOP (1025px+)
+ * ========================================
+ * Ajustes para telas grandes
+ */
+@media (min-width: 1025px) {
+
+    /**
+     * Título maior para telas grandes
+     */
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    /**
+     * Espaço padrão entre perfis
+     */
+    .profiles {
+        display: flex;
+        justify-content: center;
+        gap: 4vw;
+        flex-wrap: wrap;
+    }
+
+    /**
+     * Imagens padrão
+     */
+    .profile img {
+        width: 160px;
+        height: 160px;
+        border-width: 4px;
+    }
+
+    /**
+     * Nome do perfil padrão
+     */
+    figcaption {
+        font-size: 1.25rem;
+    }
+
+    /**
+     * Botão padrão
+     */
+    .btn-gerenciar {
+        margin-top: 4rem;
+        padding: 0.5rem 1.8rem;
     }
 }
